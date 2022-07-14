@@ -27,7 +27,9 @@ header {
 }
 header,
 footer {
-    background-color: lightblue;
+    background: linear-gradient(190deg, #0c726d, #add8e6, #3473b0);
+    background-size: 600% 600%;
+    animation: moveBg 15s ease infinite;
 }
 main {
     height: 80vh;
@@ -51,7 +53,11 @@ nav h1 {
     display: inline-block;
     vertical-align: middle;
 }
+#reloadBtn {
+    margin: 20px 0;
+}
 #play,
+#reloadBtn,
 select {
     border: 1px solid var(--primary-color);
     box-shadow: 2px 2px 5px var(--primary-color);
@@ -73,10 +79,11 @@ main,
 .cell {
     justify-content: center;
 }
+#end-alert,
 #start-alert {
     border: 1px solid var(--primary-color);
     border-radius: 10px;
-    background-color: #ffe1b9;
+    background-color: #add8e699;
     padding: 50px;
     box-shadow: 2px 2px 5px var(--primary-color);
     transition: all 3s linear;
@@ -94,7 +101,7 @@ main,
     border: var(--border-standard-primary);
     border-radius: 10px;
     margin: 2% auto 0;
-    background-color: #b1bbff;
+    background-color: #7291bab0;
     box-shadow: 0px 0px 20px 10px #001e8250;
 }
 .cell {
@@ -114,7 +121,8 @@ main,
     height: calc((100% / 7));
 }
 .clicked, 
-.bomb {
+.bomb,
+.cell {
     box-shadow: inset 0 0 10px var(--primary-color);
 }
 .clicked {
@@ -162,11 +170,16 @@ select:hover {
 }
 .cell:active,
 .clicked:hover {
-    background-color: #0f8e0f;
+    background-color: inherit;
 }
 /* 
     Keyframes 
 */
+@keyframes moveBg {
+    0% {background-position: 0% 58%;}
+    50% {background-position: 100% 43%;}
+    100% {background-position: 0% 58%;}
+}
 .vib {
     animation: shake 0.3s linear infinite;
 }

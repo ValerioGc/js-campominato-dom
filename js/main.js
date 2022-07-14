@@ -23,13 +23,13 @@ play.addEventListener('click',
             let numbBomb = controlNumbers(bombArr, 1, cellNumb);
             bombArr.push(numbBomb);
         }
-        console.log(`I numeri nell'array bombe sono: ${bombArr}`)
+        console.log(`I numeri nell'array bombe sono: ${bombArr}`);
     // Controllo stato bottone
         if (play.innerHTML == 'Riavvia') {
-            location.reload()
+            location.reload();
         } else {
         // Modifiche Schermata
-            play.innerHTML = 'Riavvia'
+            play.innerHTML = 'Riavvia';
             play.classList.remove('vib');
             level.classList.add('d-none');
             document.querySelector('label').classList.add('d-none');
@@ -49,7 +49,7 @@ play.addEventListener('click',
             // Aggiunta event listner celle
                 cell.addEventListener('click',
                     function () {
-                        this.classList.toggle('clicked')
+                        this.classList.toggle('clicked');
                     // Controllo numeri gia presenti
                         if (this.classList.contains('yetEx')) {
                             points = points;
@@ -58,8 +58,8 @@ play.addEventListener('click',
                             exitNumber.push(i);
                             points += 1;
                         }
-                        this.classList.add('yetEx')
-                        console.log(`Punteggio: ${points}`)
+                        this.classList.add('yetEx');
+                        console.log(`Punteggio: ${points}`);
                     // Contatore punti
                         if (points >= 1) {
                             points_container.innerHTML = `Punteggio: <span class="sp2">${points}</span>`;
@@ -72,21 +72,25 @@ play.addEventListener('click',
                                             <p>Hai totalizzato ${points} punti</p>`;
                             points_container.innerHTML = '';
                         }
-                    // Ciclo controllo numeri array bombe
-                        console.log(`Array Bombe: ${bombArr}`)
-                        console.log(`Array Celle: ${exitNumber}`)
-                        console.log(`Cella cliccata: ${i}`)
+                    // Condizioni sconfitta
+                        console.log(`Array Bombe: ${bombArr}`);
+                        console.log(`Array Celle: ${exitNumber}`);
+                        console.log(`Cella cliccata: ${i}`);
                         if (bombArr.includes(i)) {
-                            console.log('Bomba trovata - Partita finita')
+                            console.log('Bomba trovata - Partita finita');
                             this.classList.add('bomb');
                             this.innerHTML = '<i class="fa-solid fa-bomb fa-2x vib"></i>';
-                            // Imposto timeout per permettere animazione
+                        // Imposto timeout per permettere animazione
                             setTimeout(exitEnter, 1700);
                             end_alert.classList.add('bounce');
-                            points_container.innerHTML = '';
+                            points_container.classList.add('d-none');
+                            play.classList.add('d-none');
                             end_alert.innerHTML =
                                 `<h1 style="color:red;">Hai Perso!</h1>
-                                <p>Hai totalizzato ${points - 1} punti</p>`;
+                                <p>Hai totalizzato ${points - 1} punti</p>
+                                <button id='reloadBtn'>Riavvia</button>`;
+                            let reloadBtn = document.getElementById('reloadBtn');
+                            reloadBtn.addEventListener('click',() => location.reload())
                         }
                     }
                 );
@@ -127,6 +131,7 @@ function exitEnter() {
 }
 // Funzione Scelta livello
 function level_selector(level_in) {
+    let select;
     if (level_in == 1){
         select = 100;
     }
