@@ -18,9 +18,12 @@ play.addEventListener('click',
         const level_in = parseInt(level.value);
         let fin_l = class_level(level_in);
         console.log('Il livello é (level_in)' + ' ' + level_in);
-    // Generatore bombe
+        // Acquisisco numero celle in base alla difficoltà
+        let cellNumb = level_selector(level_in);
+        console.log(`La modalità impostata è: Livello ${level_in}. Create ${cellNumb} Celle`);
+        // Generatore bombe
         for (let i = 1; i <= 16; i++) {
-            let numbBomb = randomNumbGenerator(1, 100);
+            let numbBomb = controlNumbers(exitNumber, 1, cellNumb);
             bombArr.push(numbBomb);
         }
         console.log(`I numeri nell'array bombe sono: ${bombArr}`)
@@ -36,9 +39,6 @@ play.addEventListener('click',
             start_alert.classList.add('roll');
         // Imposto timeout per permettere animazione
             setTimeout(exitEnter, 1000);
-        // Acquisisco numero celle in base alla difficoltà
-            let cellNumb = level_selector(level_in);
-            console.log(`La modalità impostata è: Livello ${level_in}. Create ${cellNumb} Celle`);
         // Creazione contenitore e aggiunta classi
             let cellCont = document.createElement("div");
             cellCont.classList.add('inner-cont', 'bounce', 'd-flex');
@@ -52,17 +52,39 @@ play.addEventListener('click',
                 // Aggiunta event listner celle
                 cell.addEventListener('click',
                     function () {
+                        this.classList.add('yetExit')
                         this.classList.toggle('clicked')
-                        this.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-                        if (!this.classList.contains('clicked')){
-                            points = points;
-                        } else {
-                        points += 1;
-                        exitNumber.push(i);
-                        console.log(`Numeri celle cliccate: ${exitNumber}`);
-                        console.log(`Punteggio: ${points}`)
+                        // Ciclo controllo numeri array bombe
+                        let fnd_bomb = true;
+                        while (fnd_bomb == false) {
+                            let yet = false;
+                            // Controllo numeri gia presenti
+                            while (yet = false) {
+                                if (cell.classList.contain('yetEx') == true) {
+                                    points = points;
+                                }else {
+                                    cell.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                                    exitNumber.push(i);
+                                    points += 1;
+                                    yet = true;
+                                }
+                            }
+                            console.log(`Numeri celle cliccate: ${exitNumber}`);
+                            console.log(`Punteggio: ${points}`)
                             if (points => 1) {
                                 points_container.innerHTML = `Punteggio: <span class="sp2">${points}</span>`;
+                            }
+                            if (points >= (cellNumb - 16)) {
+                                end_alert.innerHTML = `<h1>Hai Vinto!</h1>
+                                            <p>Hai totalizzato ${points} punti</p>`;
+                            }
+                            if (bombArr.includes(exitNumber) == false) {
+                                fnd_bomb = true;
+                            let cellBomb = bombArr[i];
+                            cellBomb.classList.add('bomb');
+                            cellBomb.innerHTML = '<i class="fa-solid fa-bomb"></i>';
+                            end_alert.innerHTML = `<h1>Hai Perso!</h1>
+                                                <p>Hai totalizzato ${points} punti</p>`;
                             }
                         }
                     });
@@ -71,41 +93,33 @@ play.addEventListener('click',
         
     }
 );
-
-
-/*
-// Funzione controllo numeri tra le liste e risultato
-if (bombArr.classList.contains(exitNumber)) {
-    let cellBomb = bombArr[i];
-    cellBomb.classList.add('bomb');
-    cellBomb.innerHTML = '<i class="fa-solid fa-bomb"></i>';
-    setTimeout(exitEnter, 2000);
-    container_game.classList.add('d-none');
-    end_alert.classList.remove('d-none');
-    end_alert.innerHTML = `<h1>Hai Perso!</h1>
-                <p>Hai totalizzato ${points} punti</p>`;
-} else if (points >= 80) {
-    end_alert.innerHTML = `<h1>Hai Vinto!</h1>
-                <p>Hai totalizzato ${points} punti</p>`;
-}
-*/
-
-
-
-
-
-
-
-
 /********************************************** */
 /******************* FUNZIONI ***************** */
 /********************************************** */
+// Generatore numeri casuali
+function randomNumbGenerator(min, max) {
+    let rnd = Math.floor(Math.random() * ((max - min + 1) + min));
+    return rnd;
+}
+// Controllo numeri generati
+function controlNumbers(usedNumb, min, max) {
+    let final_numb = false;
+    let randomNumb;
+    while (final_numb == false) {
+        randomNumb = randomNumbGenerator(min, max);
+        if (!usedNumb.includes(randomNumb)) {
+            final_numb = true;
+        }
+    }
+    return randomNumb;
+}
 //Funzione uscita avviso ed entrata container
 function exitEnter () {
     start_alert.classList.add('d-none');
     container_game.classList.remove('d-none');
     return;
 }
+
 // Funzione Scelta livello
 function level_selector(level_in) {
     if (level_in == 1){
@@ -117,6 +131,12 @@ function level_selector(level_in) {
         select = 49;
     }
     return select;
+}
+//Generatore celle
+function cellGenerator() {
+    let cell = document.createElement("div");
+    cell.classList.add('cell', 'd-flex');
+    return cell;
 }
 // Funzione aggiunta classi dimensioni celle
 function class_level (level) {
@@ -130,19 +150,3 @@ function class_level (level) {
     }
     return fin_l;
 }
-//Generatore celle
-function cellGenerator () {
-    let cell = document.createElement("div");
-    cell.classList.add('cell','d-flex');
-    return cell;
-}
-// Generatore numeri casuali
-function randomNumbGenerator(min, max) {
-    let rnd = Math.floor(Math.random() * ((max - min + 1) + min));
-    return rnd;
-}
-
-
-
-
-
