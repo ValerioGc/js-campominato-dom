@@ -4,13 +4,11 @@ const exitNumber = [];
 // Definisco punti
 let points = 0; 
 // Definisco contenitori e pulsante play in variabili
+const play = document.getElementById('play');
 const start_alert = document.getElementById('start-alert');
 const end_alert = document.getElementById('end-alert');
 const container_game = document.getElementById('main-cont');
-const play = document.getElementById('play');
 const points_container = document.getElementById('points-container');
-
-
 // Funzione tasto Play - Riavvia
 play.addEventListener('click',
     function () {
@@ -18,10 +16,10 @@ play.addEventListener('click',
         const level_in = parseInt(level.value);
         let fin_l = class_level(level_in);
         console.log('Il livello é (level_in)' + ' ' + level_in);
-        // Acquisisco numero celle in base alla difficoltà
+    // Acquisisco numero celle in base alla difficoltà
         let cellNumb = level_selector(level_in);
         console.log(`La modalità impostata è: Livello ${level_in}. Create ${cellNumb} Celle`);
-        // Generatore bombe
+    // Generatore bombe
         for (let i = 1; i <= 16; i++) {
             let numbBomb = controlNumbers(exitNumber, 1, cellNumb);
             bombArr.push(numbBomb);
@@ -43,18 +41,18 @@ play.addEventListener('click',
             let cellCont = document.createElement("div");
             cellCont.classList.add('inner-cont', 'bounce', 'd-flex');
             container_game.append(cellCont);
-            // Ciclo creazione celle
+        // Ciclo creazione celle
             for (let i = 1; i <= cellNumb; i++) {
                 const cell = cellGenerator();
                 cell.classList = `${fin_l} cell`;
                 cell.innerHTML += i;
                 cellCont.append(cell);
-                // Aggiunta event listner celle
+            // Aggiunta event listner celle
                 cell.addEventListener('click',
                     function () {
                         this.classList.add('yetExit')
                         this.classList.toggle('clicked')
-                        // Controllo numeri gia presenti
+                    // Controllo numeri gia presenti
                         if (this.classList.contains('yetEx') == true) {
                             points = points;
                         } else {
@@ -64,9 +62,11 @@ play.addEventListener('click',
                         }
                         console.log(`Numeri celle cliccate: ${exitNumber}`);
                         console.log(`Punteggio: ${points}`)
+                    // Contatore punti
                         if (points => 1) {
                             points_container.innerHTML = `Punteggio: <span class="sp2">${points}</span>`;
                         } 
+                    // Condizione di Vittoria
                         if (points >= cellNumb - 16) {
                             container_game.classList.add('d-none');
                             end_alert.classList.remove('d-none');
@@ -74,13 +74,14 @@ play.addEventListener('click',
                                             <p>Hai totalizzato ${points} punti</p>`;
                             points_container.innerHTML = '';
                         }
-                        // Ciclo controllo numeri array bombe e punti
+                        // Ciclo controllo numeri array bombe
                         let fnd_bomb = true;
                         while (fnd_bomb == false) {
-                            // Gestione Punti
+                        // Gestione Punti
                             if (bombArr.includes(exitNumber) == false) {
                                 fnd_bomb = true;
                                 bombArr.classList.add('bomb');
+                            // Schermata sconfitta
                                 console.log('bomba trovata')
                                 document.getElementsByClassName('sp2').style.color = 'red';
                                 bombArr.innerHTML = '<i class="fa-solid fa-bomb"></i>';
@@ -88,10 +89,10 @@ play.addEventListener('click',
                                                     <p>Hai totalizzato ${points} punti</p>`;
                             }
                         }
-                    });
-                }
+                    }
+                );
+            }
         }
-        
     }
 );
 /********************************************** */
@@ -118,10 +119,6 @@ function controlNumbers(usedNumb, min, max) {
 function exitEnter () {
     start_alert.classList.add('d-none');
     container_game.classList.remove('d-none');
-    return;
-}
-function exitEnter2 () {
-
     return;
 }
 // Funzione Scelta livello
