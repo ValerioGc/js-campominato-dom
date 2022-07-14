@@ -129,9 +129,14 @@ footer {
     height: 8vh;
     box-shadow: -1px 0px 5px var(--primary-color);
 }
-footer span {
+footer > span {
     padding: 20px 0 20px 175px;
     display: inline-block;
+}
+
+.sp2 {
+    color: green;
+    font-weight: bold;
 }
 /* 
     Effetti ed Hover 

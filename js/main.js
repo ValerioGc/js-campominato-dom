@@ -1,14 +1,15 @@
 // Array celle Bomba e numeri usciti
 const bombArr = [];
 const exitNumber = [];
-
 // Definisco punti
 let points = 0; 
-
 // Definisco contenitori e pulsante play in variabili
 const start_alert = document.getElementById('start-alert');
+const end_alert = document.getElementById('end-alert');
 const container_game = document.getElementById('main-cont');
 const play = document.getElementById('play');
+const points_container = document.getElementById('points-container');
+
 
 // Funzione tasto Play - Riavvia
 play.addEventListener('click',
@@ -17,6 +18,13 @@ play.addEventListener('click',
         const level_in = parseInt(level.value);
         let fin_l = class_level(level_in);
         console.log('Il livello é (level_in)' + ' ' + level_in);
+    // Generatore bombe
+        for (let i = 1; i <= 16; i++) {
+            let numbBomb = randomNumbGenerator(1, 100);
+            bombArr.push(numbBomb);
+        }
+        console.log(`I numeri nell'array bombe sono: ${bombArr}`)
+    // Controllo stato bottone
         if (play.innerHTML == 'Riavvia') {
             location.reload()
         } else {
@@ -41,26 +49,54 @@ play.addEventListener('click',
                 cell.classList = `${fin_l} cell`;
                 cell.innerHTML += i;
                 cellCont.append(cell);
-                
                 // Aggiunta event listner celle
                 cell.addEventListener('click',
                     function () {
-                        this.innerHTML = i;
                         this.classList.toggle('clicked')
                         this.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                        if (!this.classList.contains('clicked')){
+                            points = points;
+                        } else {
                         points += 1;
-                        console.log(i);
-
                         exitNumber.push(i);
-                        
-                        console.log(exitNumber + ' ' + 'Exit numbers')
-                        console.log(points + ' ' + 'punti')
+                        console.log(`Numeri celle cliccate: ${exitNumber}`);
+                        console.log(`Punteggio: ${points}`)
+                            if (points => 1) {
+                                points_container.innerHTML = `Punteggio: <span class="sp2">${points}</span>`;
+                            }
+                        }
                     });
                 }
         }
-        console.log(points)
+        
     }
 );
+
+
+/*
+// Funzione controllo numeri tra le liste e risultato
+if (bombArr.classList.contains(exitNumber)) {
+    let cellBomb = bombArr[i];
+    cellBomb.classList.add('bomb');
+    cellBomb.innerHTML = '<i class="fa-solid fa-bomb"></i>';
+    setTimeout(exitEnter, 2000);
+    container_game.classList.add('d-none');
+    end_alert.classList.remove('d-none');
+    end_alert.innerHTML = `<h1>Hai Perso!</h1>
+                <p>Hai totalizzato ${points} punti</p>`;
+} else if (points >= 80) {
+    end_alert.innerHTML = `<h1>Hai Vinto!</h1>
+                <p>Hai totalizzato ${points} punti</p>`;
+}
+*/
+
+
+
+
+
+
+
+
 /********************************************** */
 /******************* FUNZIONI ***************** */
 /********************************************** */
@@ -105,8 +141,6 @@ function randomNumbGenerator(min, max) {
     let rnd = Math.floor(Math.random() * ((max - min + 1) + min));
     return rnd;
 }
-
-
 
 
 
