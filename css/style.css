@@ -133,10 +133,17 @@ footer > span {
     padding: 20px 0 20px 175px;
     display: inline-block;
 }
-
+#end-alert {
+    text-align: center;
+}
+#end-alert p{
+    text-decoration: underline;
+}
+#end-alert h1,
 .sp2 {
-    color: green;
     font-weight: bold;
+    font-size: 20px;
+        color: green;
 }
 /* 
     Effetti ed Hover 

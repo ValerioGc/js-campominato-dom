@@ -54,37 +54,39 @@ play.addEventListener('click',
                     function () {
                         this.classList.add('yetExit')
                         this.classList.toggle('clicked')
-                        // Ciclo controllo numeri array bombe
+                        // Controllo numeri gia presenti
+                        if (this.classList.contains('yetEx') == true) {
+                            points = points;
+                        } else {
+                            cell.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                            exitNumber.push(i);
+                            points += 1;
+                        }
+                        console.log(`Numeri celle cliccate: ${exitNumber}`);
+                        console.log(`Punteggio: ${points}`)
+                        if (points => 1) {
+                            points_container.innerHTML = `Punteggio: <span class="sp2">${points}</span>`;
+                        } 
+                        if (points >= cellNumb - 16) {
+                            container_game.classList.add('roll')
+                            setTimeout(exitEnter2, 1000);
+                            end_alert.classList.add('bounce');
+                            end_alert.innerHTML = `<h1>Hai Vinto!</h1>
+                                            <p>Hai totalizzato ${points} punti</p>`;
+                            points_container.innerHTML = '';
+                        }
+                        // Ciclo controllo numeri array bombe e punti
                         let fnd_bomb = true;
                         while (fnd_bomb == false) {
-                            let yet = false;
-                            // Controllo numeri gia presenti
-                            while (yet = false) {
-                                if (cell.classList.contain('yetEx') == true) {
-                                    points = points;
-                                }else {
-                                    cell.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-                                    exitNumber.push(i);
-                                    points += 1;
-                                    yet = true;
-                                }
-                            }
-                            console.log(`Numeri celle cliccate: ${exitNumber}`);
-                            console.log(`Punteggio: ${points}`)
-                            if (points => 1) {
-                                points_container.innerHTML = `Punteggio: <span class="sp2">${points}</span>`;
-                            }
-                            if (points >= (cellNumb - 16)) {
-                                end_alert.innerHTML = `<h1>Hai Vinto!</h1>
-                                            <p>Hai totalizzato ${points} punti</p>`;
-                            }
+                            // Gestione Punti
                             if (bombArr.includes(exitNumber) == false) {
                                 fnd_bomb = true;
-                            let cellBomb = bombArr[i];
-                            cellBomb.classList.add('bomb');
-                            cellBomb.innerHTML = '<i class="fa-solid fa-bomb"></i>';
-                            end_alert.innerHTML = `<h1>Hai Perso!</h1>
-                                                <p>Hai totalizzato ${points} punti</p>`;
+                                bombArr.classList.add('bomb');
+                                console.log('bomba trovata')
+                                document.getElementsByClassName('sp2').style.color = 'red';
+                                bombArr.innerHTML = '<i class="fa-solid fa-bomb"></i>';
+                                end_alert.innerHTML = `<h1>Hai Perso!</h1>
+                                                    <p>Hai totalizzato ${points} punti</p>`;
                             }
                         }
                     });
@@ -119,7 +121,11 @@ function exitEnter () {
     container_game.classList.remove('d-none');
     return;
 }
-
+function exitEnter2 () {
+    container_game.classList.add('d-none');
+    end_alert.classList.remove('d-none');    
+    return;
+}
 // Funzione Scelta livello
 function level_selector(level_in) {
     if (level_in == 1){
