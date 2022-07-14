@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Campo Minato</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" href="img/logobool.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    </head>
+        <body>
+        <!--
+            Header Pagina
+        -->
+        <header>
+            <nav>
+                <div>
+                    <img src="img/logobool.png" alt="Logo Boolean">
+                    <h1>Campo Minato</h1>
+                </div>
+                <div>
+                    <label for="d-level">Difficoltà:</label>
+                    <select id="d-level">
+                        <option value="1">Facile</option>
+                        <option value="2">Intermedio</option>
+                        <option value="3">Difficile</option>
+                    </select>
+                    <button id="play" class="vib">Play</button>
+                </div>
+            </nav>
+        </header>
+        <!--
+            Corpo Pagina
+        -->
+        <main>
+            <!-- Contenitore messaggio iniziale -->
+            <div id="start-alert">
+                <h2>Premi Play per Giocare</h2>
+            </div>
+            <!-- Contenitore Gioco -->
+            <div id="main-cont" class="d-none"></div>
+            <!-- Contenitore risultato partita -->
+            <div id="end-alert" class="d-none"></div>
+        </main>
+        <!--
+            Footer Pagina
+        -->
+        <footer>
+            <span>Made with &hearts; by <a href="#">Boolean</a></span>
+        </footer>
+        <script src="js/main.js"></script>
+    </body>
+</html>
