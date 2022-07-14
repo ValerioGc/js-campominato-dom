@@ -77,7 +77,6 @@ play.addEventListener('click',
                     // Ciclo controllo numeri array bombe
                         console.log(`Array Bombe: ${bombArr}`)
                         console.log(`Array Celle: ${exitNumber}`)
-                        for let x= 0; x
                         if (bombArr.includes(exitNumber[i]) == true) {
                             console.log('Bomba trovata - Partita finita')
                             this.classList.add('bomb');
