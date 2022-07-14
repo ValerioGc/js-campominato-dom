@@ -2,7 +2,7 @@
 const bombArr = [];
 const exitNumber = [];
 // Definisco punti
-let points = 0; 
+let points = 0;
 // Definisco contenitori e pulsante play in variabili
 const play = document.getElementById('play');
 const start_alert = document.getElementById('start-alert');
@@ -15,7 +15,6 @@ play.addEventListener('click',
         const level = document.getElementById('d-level');
         const level_in = parseInt(level.value);
         let fin_l = class_level(level_in);
-        console.log('Il livello é (level_in)' + ' ' + level_in);
     // Acquisisco numero celle in base alla difficoltà
         let cellNumb = level_selector(level_in);
         console.log(`La modalità impostata è: Livello ${level_in}. Create ${cellNumb} Celle`);
@@ -52,20 +51,19 @@ play.addEventListener('click',
                     function () {
                         this.classList.toggle('clicked')
                     // Controllo numeri gia presenti
-                        if (this.classList.contains('yetEx')) { 
+                        if (this.classList.contains('yetEx')) {
                             points = points;
                         } else {
-                            cell.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                            cell.innerHTML = '<i class="fa-solid fa-circle-check entrotate"></i>';
                             exitNumber.push(i);
                             points += 1;
                         }
                         this.classList.add('yetEx')
-                        console.log(`Numeri celle cliccate: ${exitNumber}`);
                         console.log(`Punteggio: ${points}`)
                     // Contatore punti
                         if (points >= 1) {
                             points_container.innerHTML = `Punteggio: <span class="sp2">${points}</span>`;
-                        } 
+                        }
                     // Condizione di Vittoria
                         if (points >= cellNumb - 16) {
                             container_game.classList.add('d-none');
@@ -77,21 +75,22 @@ play.addEventListener('click',
                     // Ciclo controllo numeri array bombe
                         console.log(`Array Bombe: ${bombArr}`)
                         console.log(`Array Celle: ${exitNumber}`)
-                        if (bombArr.includes(exitNumber[i]) == true) {
+                        console.log(`Cella cliccata: ${i}`)
+                        if (bombArr.includes(i)) {
                             console.log('Bomba trovata - Partita finita')
                             this.classList.add('bomb');
-                            this.innerHTML = '<i class="fa-solid fa-bomb fa-2x"></i>';
+                            this.innerHTML = '<i class="fa-solid fa-bomb fa-2x vib"></i>';
                             // Imposto timeout per permettere animazione
                             setTimeout(exitEnter, 1700);
                             end_alert.classList.add('bounce');
-                            points_container.innerHTML = ''; 
-                            end_alert.innerHTML = 
+                            points_container.innerHTML = '';
+                            end_alert.innerHTML =
                                 `<h1 style="color:red;">Hai Perso!</h1>
                                 <p>Hai totalizzato ${points - 1} punti</p>`;
                         }
                     }
                 );
-            } 
+            }
         }
     }
 );
@@ -104,7 +103,7 @@ function randomNumbGenerator(min, max) {
     return rnd;
 }
 // Controllo numeri generati
-function controlNumbers(usedNumb, min, max) { 
+function controlNumbers(usedNumb, min, max) {
     let final_numb = false;
     let randomNumb;
     while (final_numb == false) {
