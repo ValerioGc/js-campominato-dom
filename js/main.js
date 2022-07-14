@@ -36,7 +36,7 @@ play.addEventListener('click',
             document.querySelector('label').classList.add('d-none');
             start_alert.classList.add('roll');
         // Imposto timeout per permettere animazione
-            setTimeout(exitEnter, 1000);
+            setTimeout(exitEnterF, 1000);
         // Creazione contenitore e aggiunta classi
             let cellCont = document.createElement("div");
             cellCont.classList.add('inner-cont', 'bounce', 'd-flex');
@@ -82,14 +82,14 @@ play.addEventListener('click',
                             this.classList.add('bomb');
                             this.innerHTML = '<i class="fa-solid fa-bomb fa-2x"></i>';
                             // Imposto timeout per permettere animazione
-                            setTimeout(exit, 1700);
+                            setTimeout(exitEnter, 1700);
                             end_alert.classList.add('bounce');
                             points_container.innerHTML = ''; 
-                            end_alert.innerHTML = `<h1 style="color:red;">Hai Perso!</h1>
-                                                <p>Hai totalizzato ${points} punti</p>`;
+                            end_alert.innerHTML = 
+                                `<h1 style="color:red;">Hai Perso!</h1>
+                                <p>Hai totalizzato ${points - 1} punti</p>`;
                         }
                     }
-                    
                 );
             } 
         }
@@ -116,9 +116,14 @@ function controlNumbers(usedNumb, min, max) {
     return randomNumb;
 }
 //Funzione uscita avviso ed entrata container
-function exitEnter () {
+function exitEnterF () {
     start_alert.classList.add('d-none');
     container_game.classList.remove('d-none');
+    return;
+}
+function exitEnter() {
+    container_game.classList.add('d-none');
+    end_alert.classList.remove('d-none');
     return;
 }
 // Funzione Scelta livello
@@ -151,11 +156,3 @@ function class_level (level) {
     }
     return fin_l;
 }
-
-function exit () {
-    container_game.classList.add('d-none')
-    end_alert.classList.remove('d-none');
-    
-}
-
-
