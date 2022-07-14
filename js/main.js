@@ -68,9 +68,8 @@ play.addEventListener('click',
                             points_container.innerHTML = `Punteggio: <span class="sp2">${points}</span>`;
                         } 
                         if (points >= cellNumb - 16) {
-                            container_game.classList.add('roll')
-                            setTimeout(exitEnter2, 1000);
-                            end_alert.classList.add('bounce');
+                            container_game.classList.add('d-none');
+                            end_alert.classList.remove('d-none');
                             end_alert.innerHTML = `<h1>Hai Vinto!</h1>
                                             <p>Hai totalizzato ${points} punti</p>`;
                             points_container.innerHTML = '';
@@ -122,8 +121,7 @@ function exitEnter () {
     return;
 }
 function exitEnter2 () {
-    container_game.classList.add('d-none');
-    end_alert.classList.remove('d-none');    
+
     return;
 }
 // Funzione Scelta livello
