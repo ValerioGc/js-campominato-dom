@@ -89,7 +89,7 @@ main,
     box-shadow: inset 0px 0px 20px 10px var(--primary-color);
 }
 .inner-cont {
-    width: 96%;
+    width: 98%;
     height: 96%;
     border: var(--border-standard-primary);
     border-radius: 10px;

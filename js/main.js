@@ -21,7 +21,7 @@ play.addEventListener('click',
         console.log(`La modalità impostata è: Livello ${level_in}. Create ${cellNumb} Celle`);
     // Generatore bombe
         for (let i = 1; i <= 16; i++) {
-            let numbBomb = controlNumbers(exitNumber, 1, cellNumb);
+            let numbBomb = controlNumbers(bombArr, 1, cellNumb);
             bombArr.push(numbBomb);
         }
         console.log(`I numeri nell'array bombe sono: ${bombArr}`)
@@ -50,26 +50,20 @@ play.addEventListener('click',
             // Aggiunta event listner celle
                 cell.addEventListener('click',
                     function () {
-                        this.classList.add('yetExit')
                         this.classList.toggle('clicked')
-
-
-
                     // Controllo numeri gia presenti
-                        if (this.classList.contains('yetEx') == true) { //non funziona - da sistemare
+                        if (this.classList.contains('yetEx')) { 
                             points = points;
-
-
-
                         } else {
                             cell.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
                             exitNumber.push(i);
                             points += 1;
                         }
+                        this.classList.add('yetEx')
                         console.log(`Numeri celle cliccate: ${exitNumber}`);
                         console.log(`Punteggio: ${points}`)
                     // Contatore punti
-                        if (points => 1) {
+                        if (points >= 1) {
                             points_container.innerHTML = `Punteggio: <span class="sp2">${points}</span>`;
                         } 
                     // Condizione di Vittoria
@@ -80,30 +74,25 @@ play.addEventListener('click',
                                             <p>Hai totalizzato ${points} punti</p>`;
                             points_container.innerHTML = '';
                         }
-
-
-
-                        // Ciclo controllo numeri array bombe
-                        let fnd_bomb = true;
-                        while (fnd_bomb == false) {  //non funziona - da sistemare
-                        // Gestione Punti
-                            if (bombArr.includes(exitNumber) == false) {
-                                fnd_bomb = true;
-                                bombArr.classList.add('bomb');
-                            // Schermata sconfitta
-                                console.log('bomba trovata')
-                                document.getElementsByClassName('sp2').style.color = 'red';
-                                bombArr.innerHTML = '<i class="fa-solid fa-bomb"></i>';
-                                end_alert.innerHTML = `<h1>Hai Perso!</h1>
-                                                    <p>Hai totalizzato ${points} punti</p>`;
-                            }
+                    // Ciclo controllo numeri array bombe
+                        console.log(`Array Bombe: ${bombArr}`)
+                        console.log(`Array Celle: ${exitNumber}`)
+                        for let x= 0; x
+                        if (bombArr.includes(exitNumber[i]) == true) {
+                            console.log('Bomba trovata - Partita finita')
+                            this.classList.add('bomb');
+                            this.innerHTML = '<i class="fa-solid fa-bomb fa-2x"></i>';
+                            // Imposto timeout per permettere animazione
+                            setTimeout(exit, 1700);
+                            end_alert.classList.add('bounce');
+                            points_container.innerHTML = ''; 
+                            end_alert.innerHTML = `<h1 style="color:red;">Hai Perso!</h1>
+                                                <p>Hai totalizzato ${points} punti</p>`;
                         }
-
-
-
                     }
+                    
                 );
-            }
+            } 
         }
     }
 );
@@ -115,11 +104,8 @@ function randomNumbGenerator(min, max) {
     let rnd = Math.floor(Math.random() * ((max - min + 1) + min));
     return rnd;
 }
-
-
-
 // Controllo numeri generati
-function controlNumbers(usedNumb, min, max) { //non funziona - da sistemare
+function controlNumbers(usedNumb, min, max) { 
     let final_numb = false;
     let randomNumb;
     while (final_numb == false) {
@@ -130,9 +116,6 @@ function controlNumbers(usedNumb, min, max) { //non funziona - da sistemare
     }
     return randomNumb;
 }
-
-
-
 //Funzione uscita avviso ed entrata container
 function exitEnter () {
     start_alert.classList.add('d-none');
@@ -169,3 +152,11 @@ function class_level (level) {
     }
     return fin_l;
 }
+
+function exit () {
+    container_game.classList.add('d-none')
+    end_alert.classList.remove('d-none');
+    
+}
+
+
