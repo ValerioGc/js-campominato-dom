@@ -52,9 +52,15 @@ play.addEventListener('click',
                     function () {
                         this.classList.add('yetExit')
                         this.classList.toggle('clicked')
+
+
+
                     // Controllo numeri gia presenti
-                        if (this.classList.contains('yetEx') == true) {
+                        if (this.classList.contains('yetEx') == true) { //non funziona - da sistemare
                             points = points;
+
+
+
                         } else {
                             cell.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
                             exitNumber.push(i);
@@ -74,9 +80,12 @@ play.addEventListener('click',
                                             <p>Hai totalizzato ${points} punti</p>`;
                             points_container.innerHTML = '';
                         }
+
+
+
                         // Ciclo controllo numeri array bombe
                         let fnd_bomb = true;
-                        while (fnd_bomb == false) {
+                        while (fnd_bomb == false) {  //non funziona - da sistemare
                         // Gestione Punti
                             if (bombArr.includes(exitNumber) == false) {
                                 fnd_bomb = true;
@@ -89,6 +98,9 @@ play.addEventListener('click',
                                                     <p>Hai totalizzato ${points} punti</p>`;
                             }
                         }
+
+
+
                     }
                 );
             }
@@ -103,8 +115,11 @@ function randomNumbGenerator(min, max) {
     let rnd = Math.floor(Math.random() * ((max - min + 1) + min));
     return rnd;
 }
+
+
+
 // Controllo numeri generati
-function controlNumbers(usedNumb, min, max) {
+function controlNumbers(usedNumb, min, max) { //non funziona - da sistemare
     let final_numb = false;
     let randomNumb;
     while (final_numb == false) {
@@ -115,6 +130,9 @@ function controlNumbers(usedNumb, min, max) {
     }
     return randomNumb;
 }
+
+
+
 //Funzione uscita avviso ed entrata container
 function exitEnter () {
     start_alert.classList.add('d-none');

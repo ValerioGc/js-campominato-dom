@@ -94,8 +94,8 @@ main,
     border: var(--border-standard-primary);
     border-radius: 10px;
     margin: 2% auto 0;
-    background-color: rgb(177, 187, 255);
-    box-shadow: 0px 0px 20px 10px rgba(0, 30, 130, 0.563);
+    background-color: #b1bbff;
+    box-shadow: 0px 0px 20px 10px #001e8250;
 }
 .cell {
     border: 1px solid var(--primary-color);
