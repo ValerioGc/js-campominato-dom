@@ -1,6 +1,4 @@
 
-Reproduction of minefield game
-
 # **js-campominato-dom**    <img height="25" align="right" src="https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg">
 
 > _Reproduction of minefield game in a web page_
@@ -19,4 +17,4 @@ Reproduction of minefield game
 
 ## *_Preview:_*
 
-![Preview campo minato](/preview/campo-minato.gif)
+![Preview campo minato](/previews/campo-minato.gif)
